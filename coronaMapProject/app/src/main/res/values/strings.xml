@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">코로나맵</string>
+    <string name="title_activity_temp">Map</string>
+
+</resources>
