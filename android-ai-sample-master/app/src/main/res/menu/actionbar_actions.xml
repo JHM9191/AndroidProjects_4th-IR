@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="홈"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_css"
+        android:title="Clova Speech Synthesis"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_csr"
+        android:title="Clova Speech Recognition"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_nmt"
+        android:title="Papago NMT"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_csr_nmt_css"
+        android:title="음성번역"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_voice_chatbot"
+        android:title="음성챗봇"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_auth"
+        android:title="인증설정"
+        app:showAsAction="never"/>
+
+</menu>
