@@ -2,6 +2,7 @@ package com.example.aiqu;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,7 +53,7 @@ public class CreateQuizset extends AppCompatActivity {
             fileIntent = new Intent(Intent.ACTION_GET_CONTENT);
             fileIntent.setType("*/*");
             startActivityForResult(fileIntent, 100);
-        } else if(v.getId() == R.id.bt_register_quizset) {
+        } else if (v.getId() == R.id.bt_register_quizset) {
             et_quizset_name = findViewById(R.id.et_quizset_name);
             et_subject = findViewById(R.id.et_subject);
             Log.d("---", et_filepath.getText() + " " + et_quizset_name.getText() + " " + et_subject.getText());
@@ -60,13 +61,102 @@ public class CreateQuizset extends AppCompatActivity {
 
             intent.putExtra("name", et_quizset_name.getText() + "");
             intent.putExtra("subject", et_subject.getText() + "");
+
+            // SharedPreferences에 퀴즈셋 정보 저장하기.
+            SharedPreferences sp = getSharedPreferences("sp", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("data", "{\n" +
+                    "\t\"user\": {\n" +
+                    "\t\t \"id\": \"id01\",\n" +
+                    "\t\t \"pw\": \"pw01\",\n" +
+                    "\t\t \"name\": \"name01\",\n" +
+                    "\t\t \"email\": \"id01@naver.com\"\n" +
+                    "\t},\t\n" +
+                    "\t\"quizlist\": [{\n" +
+                    "\t\t\"quiz_name\": \"math101\",\n" +
+                    "\t\t\"quiz_set\": [\n" +
+                    "\t\t\t{\n" +
+                    "\t\t\t\t\"#\": 1,\n" +
+                    "\t\t\t\t\"question\": \"What is 1+1?\",\n" +
+                    "\t\t\t\t\"question_type\": \"multiplechoice\",\n" +
+                    "\t\t\t\t\"selections\": [\n" +
+                    "\t\t\t\t\t\"1\",\n" +
+                    "\t\t\t\t\t\"2\",\n" +
+                    "\t\t\t\t\t\"3\",\n" +
+                    "\t\t\t\t\t\"4\",\n" +
+                    "\t\t\t\t\t\"5\"\n" +
+                    "\t\t\t\t],\n" +
+                    "\t\t\t\t\"answer\": \"2\"\n" +
+                    "\t\t\t},\n" +
+                    "\t\t\t{\n" +
+                    "\t\t\t\t\"#\": 2,\n" +
+                    "\t\t\t\t\"question\": \"What is your 2 times 2?\",\n" +
+                    "\t\t\t\t\"question_type\": \"shortanswer\",\n" +
+                    "\t\t\t\t\"selections\": [null],\n" +
+                    "\t\t\t\t\"answer\": \"4\"\n" +
+                    "\t\t\t}\n" +
+                    "\t\t],\n" +
+                    "\t\t\"quiz_summary\": {\n" +
+                    "\t\t\t\"unanswered\": [6,7,8,9,10],\n" +
+                    "\t\t\t\"answered\": [1,2,3,4,5],\n" +
+                    "\t\t\t\"correct\": [1,3,5],\n" +
+                    "\t\t\t\"incorrect\": [2,4]\n" +
+                    "\t\t}\n" +
+                    "\t},\n" +
+                    "\t{\n" +
+                    "\t\t\"quiz_name\": \"science101\",\n" +
+                    "\t\t\"quiz_set\": [\n" +
+                    "\t\t\t{\n" +
+                    "\t\t\t\t\"#\": 1,\n" +
+                    "\t\t\t\t\"question\": \"What is atom?\",\n" +
+                    "\t\t\t\t\"question_type\": \"multiplechoice\",\n" +
+                    "\t\t\t\t\"selections\": [\n" +
+                    "\t\t\t\t\t\"aa\",\n" +
+                    "\t\t\t\t\t\"bb\",\n" +
+                    "\t\t\t\t\t\"cc\",\n" +
+                    "\t\t\t\t\t\"dd\",\n" +
+                    "\t\t\t\t\t\"ee\"\n" +
+                    "\t\t\t\t],\n" +
+                    "\t\t\t\t\"answer\": \"aa\"\n" +
+                    "\t\t\t},\n" +
+                    "\t\t\t{\n" +
+                    "\t\t\t\t\"#\": 2,\n" +
+                    "\t\t\t\t\"question\": \"What is your name?\",\n" +
+                    "\t\t\t\t\"question_type\": \"multiplechoice\",\n" +
+                    "\t\t\t\t\"selections\": [\n" +
+                    "\t\t\t\t\t\"aa\",\n" +
+                    "\t\t\t\t\t\"bb\",\n" +
+                    "\t\t\t\t\t\"cc\",\n" +
+                    "\t\t\t\t\t\"dd\",\n" +
+                    "\t\t\t\t\t\"ee\"\n" +
+                    "\t\t\t\t],\n" +
+                    "\t\t\t\t\"answer\": \"aa\"\n" +
+                    "\t\t\t},\n" +
+                    "\t\t\t{\n" +
+                    "\t\t\t\t\"#\": 3,\n" +
+                    "\t\t\t\t\"question\": \"What is my name?\",\n" +
+                    "\t\t\t\t\"question_type\": \"shortanswer\",\n" +
+                    "\t\t\t\t\"selections\": [null],\n" +
+                    "\t\t\t\t\"answer\": \"aa\"\n" +
+                    "\t\t\t}\n" +
+                    "\t\t],\n" +
+                    "\t\t\"quiz_summary\": {\n" +
+                    "\t\t\t\"unanswered\": [6,7,8,9,10],\n" +
+                    "\t\t\t\"answered\": [1,2,3,4,5],\n" +
+                    "\t\t\t\"correct\": [1,3,5],\n" +
+                    "\t\t\t\"incorrect\": [2,4]\n" +
+                    "\t\t}\n" +
+                    "\t}]\n" +
+                    "}");
+            editor.commit();
+
             startActivity(intent);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == 100) {
+        if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
                 String path = data.getData().getPath();
                 Log.d("---", path);
